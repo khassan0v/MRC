@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 28
+/svn/!svn/ver/2/trunk/libI2C
+END
+libI2C_config.inc
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/libI2C/libI2C_config.inc
+END
+libI2C_SlaveInterrupt.inc
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/libI2C/libI2C_SlaveInterrupt.inc
+END
+libI2C_Slave.inc
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/libI2C/libI2C_Slave.inc
+END
+libI2C_Master.inc
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/libI2C/libI2C_Master.inc
+END
+libI2C_config_slave.inc
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/libI2C/libI2C_config_slave.inc
+END
