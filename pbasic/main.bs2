@@ -1,34 +1,29 @@
 '{$STAMP BS2}
 
-i    VAR Word
-freq    VAR Word
-irDLeft    VAR Bit
-irDRight  VAR Bit
-leftDist  VAR Word
-rightDist  VAR Word
-leftServo  VAR Word
+i           VAR Word
+freq        VAR Word
+irDLeft     VAR Bit
+irDRight    VAR Bit
+leftDist    VAR Word
+rightDist   VAR Word
+leftServo   VAR Word
 rightServo  VAR Word
-Kp    CON 20
-centerServo  CON 750
-k VAR Bit
-INPUT 1
+Kp          CON 20
+centerServo CON 750
+k           VAR Bit
+INPUT           1
 
 DO
   GOSUB get_distance
   GOSUB compas_control
   rightServo = centerServo - ((leftDist * 2 - 5) * Kp)
   leftServo = centerServo + ((rightDist * 2 - 5) * Kp)
-  GOSUB go_servo
+  GOSUB set_servo 
 LOOP
 
 compas_control:
-  IF leftDist = 5 AND rightDist = 5 AND IN1 = 0 THEN set_r_dist
+  IF leftDist = 5 AND rightDist = 5 AND IN1 = 0 THEN rightDist = 0 
 RETURN
-
-set_r_dist:
-  rightDist = 0
-RETURN
-
 
 get_distance:
   leftDist = 0
@@ -42,9 +37,9 @@ get_distance:
     leftDist = leftDist + irDLeft
     rightDist = rightDist + irDRight
   NEXT
-  RETURN
+RETURN
 
-go_servo:
+set_servo:
   PULSOUT 13, leftServo
   PULSOUT 12, rightServo
 RETURN
