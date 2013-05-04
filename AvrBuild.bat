@@ -1,2 +1,0 @@
-@ECHO OFF
-"C:\!Work\AVRStudio\AvrAssembler2\avrasm2.exe" -S "C:\!Work\!Projects\AVRStudio\CompasDriver\labels.tmp" -fI -W+ie -C V2 -o "C:\!Work\!Projects\AVRStudio\CompasDriver\CompasDriver.hex" -d "C:\!Work\!Projects\AVRStudio\CompasDriver\CompasDriver.obj" -e "C:\!Work\!Projects\AVRStudio\CompasDriver\CompasDriver.eep" -m "C:\!Work\!Projects\AVRStudio\CompasDriver\CompasDriver.map" "C:\!Work\!Projects\AVRStudio\CompasDriver\CompasDriver.asm"
