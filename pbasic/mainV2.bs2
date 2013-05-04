@@ -1,0 +1,50 @@
+'{$STAMP BS2}
+
+i    VAR Word
+freq    VAR Word
+irDLeft    VAR Bit
+irDRight  VAR Bit
+leftDist  VAR Word
+rightDist  VAR Word
+leftServo  VAR Word
+rightServo  VAR Word
+Kp    CON 20
+centerServo  CON 750
+k VAR Bit
+INPUT 1
+
+DO
+  GOSUB get_distance
+  GOSUB compas_control
+  rightServo = centerServo - ((leftDist * 2 - 5) * Kp)
+  leftServo = centerServo + ((rightDist * 2 - 5) * Kp)
+  GOSUB go_servo
+LOOP
+
+compas_control:
+  IF leftDist = 5 AND rightDist = 5 AND IN1 = 0 THEN set_r_dist
+RETURN
+
+set_r_dist:
+  rightDist = 0
+RETURN
+
+
+get_distance:
+  leftDist = 0
+  rightDist = 0
+  FOR i = 0 TO 4
+    LOOKUP i, [37500, 38250, 39500, 40500, 41500], freq
+    FREQOUT 8, 1, freq
+    irDLeft = IN9
+    FREQOUT 2, 1, freq
+    irDRight = IN0
+    leftDist = leftDist + irDLeft
+    rightDist = rightDist + irDRight
+  NEXT
+  RETURN
+
+go_servo:
+  PULSOUT 13, leftServo
+  PULSOUT 12, rightServo
+RETURN
