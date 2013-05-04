@@ -32,8 +32,6 @@
 X_M_H: .byte 2
 X_M_L: .byte 2
 
-
-
 ; SRAM Data segment END
 ; ==========================================================
 
@@ -77,28 +75,19 @@ RESET:                        ; Main programm
 	rcall Init
 	sei
 	
-	GCykle:                   ; Wating for interrupts       .
+	GCykle:                   ; Wating for interrupts       
 	rjmp GCykle               ; Goosey kicking!
 
 Init:                         ; System unints initialization
 
-	; rcall Switch_Init
-
-	;-----------------------------------
-	;	cpi SWITCHER_STATUS, 0b11111111
-	;	breq not_conf_comp
-	;-----------------------------------
 	rcall Timer0_Init
 	rcall LSM303DLH_config
 	rcall LED_Init
-
-	; not_conf_comp:
 
 	sbi O_BUS_DDR, POG
 	sbi O_BUS_DDR, POS
 	clr OUT_X_H_M
 	clr OUT_X_L_M
-		
 	ret
 
 Timer0_Init:                  ; 8-bit Timer0 initialization
@@ -115,15 +104,6 @@ LED_Init:
 	sbi LED_DDR, PD4
 	sbi LED_PORT, PD4
 
-	ret
-
-Switch_Init:     
-                              ; Put's switcher's status
-	ser tmp                   ; in SWITCHER_STATUS
-	out SWI_PORT, tmp
-	nop
-	in tmp, SWI_IN
-	mov SWITCHER_STATUS, tmp
 	ret
 
 LSM303DLH_read:
@@ -281,7 +261,7 @@ ret
 ; =================================================================
 ; Interrupts Service
 
-TIM0_OVF:                    ; Timer0 
+TIM0_OVF:                    
 
 	rcall LSM303DLH_read
 
@@ -305,7 +285,6 @@ TIM0_OVF:                    ; Timer0
 	sbi LED_PORT, LED_POG
 		
 TOVF0_exit:
-
 	reti
 
 
